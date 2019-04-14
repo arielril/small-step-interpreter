@@ -11,12 +11,17 @@ public class Sum extends AritExpression {
   }
 
   @Override
-  AritExpression smallStep(Environment a) {
+  public AritExpression smallStep(Environment a) {
     if(!(e1 instanceof IntVal))
-      return new Sum((AritExpression) e1.smallStep(a), e2);
+      return new Sum(e1.smallStep(a), e2);
     else if (!(e2 instanceof IntVal)) 
-      return new Sum(e1, (AritExpression) e2.smallStep(a));
+      return new Sum(e1, e2.smallStep(a));
     else 
       return new IntVal(((IntVal) e1).getVal() + ((IntVal) e2).getVal());
+  }
+
+  @Override
+  public String toString() {
+    return this.e1.toString() + " + " + this.e2.toString();
   }
 }

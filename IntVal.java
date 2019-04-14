@@ -13,8 +13,12 @@ public class IntVal extends AritExpression {
   }
 
   @Override
-  AritExpression smallStep(Environment a) {
-    return null;
+  public AritExpression smallStep(Environment a) {
+    return this;
   }
-  
+
+  @Override
+  public String toString() {
+    return String.valueOf(this.getVal());
+  }
 }
