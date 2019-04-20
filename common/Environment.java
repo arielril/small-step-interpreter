@@ -1,5 +1,10 @@
+package common;
+
 import java.util.HashMap;
 import java.util.Map;
+
+import aritmetic.IntVal;
+import aritmetic.Variable;
 
 /**
  * Environment
@@ -9,7 +14,6 @@ public class Environment {
 
   /**
    * Add the variable with a value to the environment
-   * 
    * @param variable Variable name
    * @param value    Variable value
    */
@@ -19,7 +23,6 @@ public class Environment {
 
   /**
    * Updates the value of a variable
-   * 
    * @param variable Variable name
    * @param value    Variable value
    */
@@ -29,7 +32,6 @@ public class Environment {
 
   /**
    * Gets the value of a variable
-   * 
    * @param variable Variable name
    * @return The value of the requested variable
    */

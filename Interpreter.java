@@ -1,7 +1,10 @@
+import aritmetic.*;
+import common.*;
+
 /**
- * Parser
+ * Interpreter
  */
-public class Parser {
+public class Interpreter {
 
   public static void printDivider() {
     System.out.println("----------------------------------------------------");
