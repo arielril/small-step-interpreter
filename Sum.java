@@ -22,6 +22,6 @@ public class Sum extends AritExpression {
 
   @Override
   public String toString() {
-    return this.e1.toString() + " + " + this.e2.toString();
+    return "Plus (" + this.e1.toString() + ") (" + this.e2.toString() + ")";
   }
 }

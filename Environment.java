@@ -1,13 +1,11 @@
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Map.Entry;
 
 /**
  * Environment
  */
 public class Environment {
-  private Map<String, Integer> mapping = new HashMap<>();
+  private Map<Variable, IntVal> mapping = new HashMap<>();
 
   /**
    * Add the variable with a value to the environment
@@ -15,7 +13,7 @@ public class Environment {
    * @param variable Variable name
    * @param value    Variable value
    */
-  public void add(String variable, int value) {
+  public void add(Variable variable, IntVal value) {
     mapping.put(variable, value);
   }
 
@@ -25,7 +23,7 @@ public class Environment {
    * @param variable Variable name
    * @param value    Variable value
    */
-  public void update(String variable, int value) {
+  public void update(Variable variable, IntVal value) {
     mapping.replace(variable, value);
   }
 
@@ -35,24 +33,24 @@ public class Environment {
    * @param variable Variable name
    * @return The value of the requested variable
    */
-  public int get(String variable) {
+  public IntVal get(Variable variable) {
     return mapping.get(variable);
   }
 
   @Override
   public String toString() {
-    StringBuilder env = new StringBuilder("[");
-    Iterator<Entry<String, Integer>> iterator = mapping.entrySet().iterator();
+    StringBuilder env = new StringBuilder("[ ");
+    var iterator = mapping.entrySet().iterator();
     while (iterator.hasNext()) {
-      Entry<String, Integer> e = iterator.next();
-      env.append(e.getKey());
+      var e = iterator.next();
+      env.append(e.getKey().getName());
       env.append(" |-> ");
-      env.append(e.getValue());
+      env.append(e.getValue().getVal());
       if (iterator.hasNext()) 
         env.append(", ");
     }
 
-    env.append("]");
+    env.append(" ]");
     return env.toString();
   }
 }

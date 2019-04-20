@@ -12,8 +12,17 @@ public class Variable extends AritExpression {
     this.name = name;
   }
 
+  public String getName() {
+    return this.name;
+  }
+
   @Override
   public AritExpression smallStep(Environment a) {
-    return new IntVal(a.get(this.name));
+    return a.get(this);
+  }
+
+  @Override
+  public String toString() {
+    return "Var " + getName();
   }
 }
