@@ -1,2 +1,2 @@
 # small-step-parser
-Interpretacao de Linguagens de Programação - Parser para Linguagem IMP Small Step
+Interpretacao de Linguagens de Programação - Interpretador para Linguagem IMP Small Step
