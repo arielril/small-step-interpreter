@@ -27,7 +27,10 @@ public class Environment {
    * @param value    Variable value
    */
   public void update(Variable variable, IntVal value) {
-    mapping.replace(variable, value);
+    if (!mapping.containsKey(variable)) 
+      mapping.put(variable, value);
+    else 
+      mapping.replace(variable, value);
   }
 
   /**

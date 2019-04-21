@@ -14,6 +14,6 @@ public class Skip extends CommandExpression {
   
   @Override
   public String toString() {
-    return "SKIP";
+    return " SKIP ";
   }
 }

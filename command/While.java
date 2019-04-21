@@ -21,10 +21,7 @@ public class While extends CommandExpression {
       // bool
       boolExp,
       // if
-      new Sequencial(
-        cmd, 
-        new While(boolExp, cmd)
-      ),
+      new Sequencial(cmd, this),
       // else
       new Skip()
     );

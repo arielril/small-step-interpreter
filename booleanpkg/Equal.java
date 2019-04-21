@@ -28,6 +28,6 @@ public class Equal extends BoolExpression {
 
   @Override
   public String toString() {
-    return exp1.toString() + " == " + exp2.toString();
+    return "(" + exp1.toString() + " == " + exp2.toString() + ")";
   }
 }

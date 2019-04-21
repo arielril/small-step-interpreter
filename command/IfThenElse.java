@@ -40,12 +40,12 @@ public class IfThenElse extends CommandExpression {
 
     str.append(" { ");
     str.append(cmdIf.toString());
-    str.append("} ");
+    str.append(" } ");
 
     str.append("else");
-    str.append(" {");
+    str.append(" { ");
     str.append(cmdElse.toString());
-    str.append(" }");
+    str.append(" } ");
 
 
 

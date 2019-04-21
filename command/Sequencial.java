@@ -18,9 +18,8 @@ public class Sequencial extends CommandExpression {
   public CommandExpression smallStep(Environment e) {
     if (!(cmd1 instanceof Skip))
       return new Sequencial(cmd1.smallStep(e), cmd2);
-    
     // if cmd1 is SKIP, executes the second command
-    return new Sequencial(cmd1, cmd2.smallStep(e));
+    return cmd2;
   }
 
   @Override

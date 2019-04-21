@@ -22,8 +22,12 @@ public class Atrib extends CommandExpression {
     if (!(value instanceof IntVal)) 
       return new Atrib(variable, value.smallStep(e));
 
-    // update all ocurrences of the variable with the new value
-    e.update(variable, (IntVal) value);
+    if (e.get(variable) == null) {
+      e.add(variable, (IntVal) value);
+    } else {
+      // update all ocurrences of the variable with the new value
+      e.update(variable, (IntVal) value);
+    }
     // return SKIP with the new state
     return new Skip();
   
