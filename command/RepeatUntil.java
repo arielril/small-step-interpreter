@@ -5,7 +5,17 @@ import booleanpkg.Not;
 import common.Environment;
 
 /**
+ * Definitions of the command Repeat Until
+ * 
  * RepeatUntil
+ * 
+ * Sintaxe: repeat C until B
+ * 
+ * Semantica:
+ * 
+ * RepeatUntil _____________________________________________________________________________
+ *              <repeat C until B, s> ->{c} <if B then skip else (C; repeat C until B), s> 
+ * 
  */
 public class RepeatUntil extends CommandExpression {
   private BoolExpression boolExp;
