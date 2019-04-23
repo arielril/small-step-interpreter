@@ -12,38 +12,59 @@ public class Interpreter {
     System.out.println("----------------------------------------------------");
   }
 
-  public static void simpleSum() {
-    printDivider();
-    System.out.println("Simple Sum:\n");
-    IntVal two1 = new IntVal(2);
-    IntVal two2 = new IntVal(2);
-
-    Variable var1 = new Variable("X");
-    Variable var2 = new Variable("Y");
+  /**
+   * Computes the last 2 fibonacci numbers. The results are in the A and B variables
+   */
+  public static void fstUsage() {
+    Variable varA = new Variable("A");
+    Variable varB = new Variable("B");
+    Variable varI = new Variable("I");
+    Variable varN = new Variable("N");
+    Variable varC = new Variable("C");
+    
+    AbstractSyntaxTree prog = new Sequencial(
+      new Atrib(varA, new IntVal(1)), 
+      new Sequencial(
+        new Atrib(varB, new IntVal(1)),
+        new Sequencial(
+          new Atrib(varI, new IntVal(1)),
+          new Sequencial(
+            new Atrib(varN, new IntVal(7)),
+            new While(
+              new Or(
+                new LessThan(varI, new Sub(varN, new IntVal(2))),
+                new Equal(varI, new Sub(varN, new IntVal(2)))
+              ),
+              new Sequencial(
+                new Atrib(varC, new Sum(varA, varB)), 
+                new Sequencial(
+                  new Atrib(varA, varB),
+                  new Sequencial(
+                    new Atrib(varB, varC),
+                    new Atrib(varI, new Sum(varI, new IntVal(1)))
+                  )
+                )
+              )
+            )
+          )
+        )
+      )
+    );    
 
     Environment e = new Environment();
-    e.add(var1, two1);
-    e.add(var2, two2);
-
-    AritExpression s = new Sum(var1, var2);
-
-    System.out.println("Env: " + e.toString());
-
+    
     int c = 0;
-    while (!(s instanceof IntVal)) {
-      System.out.println("Sum small " + c + ": " + s.toString());
-      s = s.smallStep(e);
+    while (!(prog instanceof Skip) && !(prog instanceof IntVal) && !(prog instanceof BoolVal)) {
+      System.out.println("Step " + c + ": " + prog.toString());
+      System.out.println("\nEnv: " + e.toString());
+      prog = prog.smallStep(e);
       c++;
     }
 
-    System.out.println("Sum final: " + s.toString());
-    printDivider();
-    System.out.println();
+    System.out.println("Final: " + prog.toString());
   }
 
-  public static void whileEx() {
-    printDivider();
-    System.out.println("While exercise 1:");
+  public static void sndUsage() {
     var varZ = new Variable("Z");
     var varY = new Variable("Y");
     var varX = new Variable("X");
@@ -64,22 +85,59 @@ public class Interpreter {
     e.add(varY, new IntVal(5));
 
     int c = 0;
-    while (!(prog instanceof Skip)) {
+    while (!(prog instanceof Skip) && !(prog instanceof IntVal) && !(prog instanceof BoolVal)) {
+      System.out.println("Step " + c + ": " + prog.toString());
       System.out.println("\nEnv: " + e.toString());
-      System.out.println("Prog step " + c + ": " + prog.toString());
       prog = prog.smallStep(e);
       c++;
     }
 
-    System.out.println("Prog final: " + prog.toString());
-    printDivider();
-    System.out.println();
+    System.out.println("Final: " + prog.toString());
+  }
+
+  /**
+   * Computes the factorial of X
+   */
+  public static void trdUsage() {
+    Variable varZ = new Variable("Z");
+    Variable varX = new Variable("X");
+
+    AbstractSyntaxTree prog = new RepeatUntil(
+      new Sequencial(new Atrib(varZ, new Mult(varZ, varX)), new Atrib(varX, new Sub(varX, new IntVal(1)))),
+      new Equal(varX, new IntVal(0))
+    );
+
+    Environment e = new Environment();
+    e.add(varX, new IntVal(5));
+    e.add(varZ, new IntVal(1));
+
+    int c = 0;
+    while (!(prog instanceof Skip) && !(prog instanceof IntVal) && !(prog instanceof BoolVal)) {
+      System.out.println("Step " + c + ": " + prog.toString());
+      System.out.println("\nEnv: " + e.toString());
+      prog = prog.smallStep(e);
+      c++;
+    }
+
+    System.out.println("Final: " + prog.toString());
   }
 
   public static void main(String[] args) {
     System.out.println("Running the parser :D !\n");
 
-    // simpleSum();
-    whileEx();
+    printDivider();
+    fstUsage();
+    printDivider();
+    System.out.println();
+
+    printDivider();
+    sndUsage();
+    printDivider();
+    System.out.println();
+
+    printDivider();
+    trdUsage();
+    printDivider();
+    System.out.println();
   }
 }
